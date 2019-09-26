@@ -1,0 +1,20 @@
+{
+  "name": "cursocintanegra_inst_b",
+  "version": "1.0.0",
+  "description": "copia instagram b",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "Berenice Ramirez",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "graphql-yoga": "^1.18.3",
+    "mongoose": "^5.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}

@@ -1,0 +1,41 @@
+
+
+type Query {
+    getInstagramers:[Instagramer]!
+}
+
+type Mutation{
+    createNewInstagramer(data:InstagramerInput!):Instagramer!
+}
+
+type Instagramer{
+    _id:ID!
+    nombre:String!
+    apellido:String!
+    nombreUsuario:String!
+    email:String!
+    numTelefono:String
+    sexo:GENEROS
+    imagen_perfil:String!
+    biografia:String
+    website:String
+}
+
+input InstagramerInput {
+    nombre:String!
+    apellido:String!
+    nombreUsuario:String!
+    email:String!
+    numTelefono:String
+    password:String
+    sexo:GENEROS
+    imagen_perfil:String
+    biografia:String
+    website:String
+}
+
+enum GENEROS {
+    M
+    F
+    O
+}
