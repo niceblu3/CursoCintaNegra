@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
-const InstagramersSchema = new Schema({
+const AutoresSchema = new Schema({
     nombre:{
       type:String,
       required:true
@@ -47,4 +47,4 @@ const InstagramersSchema = new Schema({
     }
 },{timestamps:true});
 
-module.exports = mongoose.model('instagramers',InstagramersSchema);
+module.exports = mongoose.model('Autores',AutoresSchema);

@@ -1,7 +1,7 @@
-const Instagramers = require('./Instagramers');
+const Autores = require('./Autores');
 const Publicaciones = require('./Publicaciones');
 
 module.exports = {
-  Instagramers,
+  Autores,
   Publicaciones
 };

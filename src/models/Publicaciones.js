@@ -17,11 +17,15 @@ const PublicacionesSchema = new Schema({
     },
     liked_by:{
       type:[Schema.Types.ObjectId],
-      ref:'instagramers'
+      ref:'Autores'
     },
     activo:{
       type:Boolean,
       default:true
+    },
+    instagramer:{
+      type:Schema.Types.ObjectId,
+      ref:'autor'
     }
 },{timestamps:true});
 

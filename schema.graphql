@@ -1,35 +1,69 @@
+scalar EmailAddress
+scalar URL
 
 
 type Query {
-    getInstagramers:[Instagramer]!
+    getAutores:[Autor]!
+    getOneAutor(id:ID!):Autor
+    getSingleAutor:[Publicaciones]!
+    getOnePublicacion(id:ID!):Publicaciones!
 }
 
 type Mutation{
-    createNewInstagramer(data:InstagramerInput!):Instagramer!
+    createNewAutor(data:AutorInput!):Autor!
+    updateOneAutor(id:ID!,data:AutorUpdateInput!):Autor
+    deleteOneAutor(id:ID!):String!
+    createNewPublicacion(data:PublicacionInput!):Publicaciones
+    updateOnePublicacion(id:ID!,data:PublicacionUpdateInput):Publicaciones!
+    deleteOnePublicacion(id:ID!):String!
 }
 
-type Instagramer{
+
+type Publicacion {
+  _id: ID!
+  titulo:String!
+  imagen:URL!
+  contenido:String!
+  Autor: Autor!
+  liked_by: [Autor]!
+
+}
+
+input PublicacionInput{
+  titulo: String!
+  contenido:String!
+  Autor: String! #va el id
+  imagen:URL
+}
+
+input PublicacionUpdateInput{
+  titulo: String
+  cone
+}
+
+
+type Autor{
     _id:ID!
     nombre:String!
     apellido:String!
     nombreUsuario:String!
-    email:String!
+    email:EmailAddress!
     numTelefono:String
     sexo:GENEROS
-    imagen_perfil:String!
+    imagen_perfil:URL!
     biografia:String
     website:String
 }
 
-input InstagramerInput {
+input AutorInput {
     nombre:String!
     apellido:String!
     nombreUsuario:String!
-    email:String!
+    email:EmailAddress!
     numTelefono:String
     password:String
     sexo:GENEROS
-    imagen_perfil:String
+    imagen_perfil:URL
     biografia:String
     website:String
 }

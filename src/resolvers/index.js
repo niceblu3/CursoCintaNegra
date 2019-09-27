@@ -1,14 +1,18 @@
-const {Query:QueryInstagramer, Mutation:MutationInstagramer} = require('./InstagramersResolvers');
+const {Query:QueryAutor, Mutation:MutationAutor} = require('./AutoresResolvers');
+const {Query:QueryPublicacion, Mutation:MutationPublicacion} = require('./PublicacionesResolvers');
+const {URLResolver, EmailAddressResolver} = require('graphql-scalars');
 
-const InstagramerResolver = require('./InstagramersResolvers');
 
 module.exports = {
-  Query: {
+  EmailAddressResolver:EmailAddressResolver,
+  URL:URLResolver,
 
-    ...InstagramerResolver.Query
+  Query{
+    ...QueryAutor,
+    ...QueryPublicacion
   },
-
-  Mutation: {
-    ...InstagramerResolver.Mutation
+  Mutation{
+    ...MutationAutor,
+    ...MutationPublicacion
   }
 };
