@@ -1,11 +1,17 @@
-const {getAllInstagramers} = require('../../services/InstagramersService');
+const {getAllAutores, getOneAutor} = require('../../services/AutoresService');
 
-const getInstagramers = async() => {
-    const allInsta = await getAllInstagramers();
-    return allInsta;
+const getAutores = async() => {
+    const autores = await getAllAutores();
+    return autores;
 };
 
+const getSingleAutor = async(_,params) => {
+  const autor = await getOneAutor(params.id);
+  if(!autor) throw new Error ('No existe el autor');
+  return autor;
+}
 
 module.exports = {
-  getInstagramers
+  getAutores,
+  getSingleAutor
 };

@@ -1,9 +1,9 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
-const PublicacionesSchema = new Schema({
+const PublicacionSchema = new Schema({
     imagen:{
       type:String,
-      required:true
+      //required:true
     },
     titulo:{
       type:String,
@@ -17,16 +17,16 @@ const PublicacionesSchema = new Schema({
     },
     liked_by:{
       type:[Schema.Types.ObjectId],
-      ref:'Autores'
+      ref:'autores'
     },
     activo:{
       type:Boolean,
       default:true
     },
-    instagramer:{
+    autor:{
       type:Schema.Types.ObjectId,
-      ref:'autor'
+      ref:'autores'
     }
 },{timestamps:true});
 
-module.exports = mongoose.model('publicaciones',PublicacionesSchema);
+module.exports = mongoose.model('publicaciones',PublicacionSchema);

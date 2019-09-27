@@ -4,41 +4,44 @@ scalar URL
 
 type Query {
     getAutores:[Autor]!
-    getOneAutor(id:ID!):Autor
-    getSingleAutor:[Publicaciones]!
-    getOnePublicacion(id:ID!):Publicaciones!
+    getSingleAutor(id:ID!):Autor!
+    getPublicaciones:[Publicacion]!
+    getOnePublicacion(id:ID!):Publicacion!
 }
 
 type Mutation{
     createNewAutor(data:AutorInput!):Autor!
-    updateOneAutor(id:ID!,data:AutorUpdateInput!):Autor
+    updateOneAutor(id:ID!,data:AutorUpdateInput!):Autor!
     deleteOneAutor(id:ID!):String!
-    createNewPublicacion(data:PublicacionInput!):Publicaciones
-    updateOnePublicacion(id:ID!,data:PublicacionUpdateInput):Publicaciones!
+    createNewPublicacion(data:PublicacionInput!):Publicacion
+    updateOnePublicacion(id:ID!,data:PublicacionUpdateInput):Publicacion!
     deleteOnePublicacion(id:ID!):String!
 }
 
 
 type Publicacion {
   _id: ID!
+  imagen:URL #debe ser obligatorio
   titulo:String!
-  imagen:URL!
   contenido:String!
-  Autor: Autor!
+  autor: Autor!
   liked_by: [Autor]!
 
 }
 
-input PublicacionInput{
+input PublicacionInput {
   titulo: String!
   contenido:String!
-  Autor: String! #va el id
-  imagen:URL
+  autor: String! #va el id
+  imagen: URL #debe ir obligatorio
 }
 
 input PublicacionUpdateInput{
   titulo: String
-  cone
+  contenido: String
+  imagen:URL
+  liked_by: String
+  activo: Boolean
 }
 
 
@@ -66,6 +69,17 @@ input AutorInput {
     imagen_perfil:URL
     biografia:String
     website:String
+}
+
+
+input AutorUpdateInput {
+    nombre:String
+    apellido: String
+    email: EmailAddress
+    password: String
+    sexo: GENEROS
+    imagen_perfil: String
+    activo: Boolean
 }
 
 enum GENEROS {

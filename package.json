@@ -12,6 +12,7 @@
   "dependencies": {
     "dotenv": "^8.1.0",
     "graphql-scalar": "0.0.9",
+    "graphql-scalars": "^1.0.1",
     "graphql-yoga": "^1.18.3",
     "mongoose": "^5.7.1"
   },

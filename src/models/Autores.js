@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
-const AutoresSchema = new Schema({
+const AutorSchema = new Schema({
     nombre:{
       type:String,
       required:true
@@ -47,4 +47,4 @@ const AutoresSchema = new Schema({
     }
 },{timestamps:true});
 
-module.exports = mongoose.model('Autores',AutoresSchema);
+module.exports = mongoose.model('autores',AutorSchema);
