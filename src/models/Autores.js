@@ -1,4 +1,6 @@
 const mongoose = require ('mongoose');
+const bcrypt = require('bcrypt');
+
 const Schema = mongoose.Schema;
 const AutorSchema = new Schema({
     nombre:{
@@ -46,5 +48,19 @@ const AutorSchema = new Schema({
       default:true
     }
 },{timestamps:true});
+
+AutorSchema.pre('save',function(next){
+    const autor = this;
+    const SALT_FACTOR = 10;
+    if(!autor.isModified('password')) {return next();}
+    bcrypt.genSalt(SALT_FACTOR,function(err,salt){
+        if(err) return next(err);
+        bcrypt.hash(autor.password,salt,function(err,hash){
+            if(err) return next(err);
+            autor.password = hash;
+            next();
+        });
+    });
+});
 
 module.exports = mongoose.model('autores',AutorSchema);

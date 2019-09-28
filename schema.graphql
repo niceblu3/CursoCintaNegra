@@ -16,8 +16,13 @@ type Mutation{
     createNewPublicacion(data:PublicacionInput!):Publicacion
     updateOnePublicacion(id:ID!,data:PublicacionUpdateInput):Publicacion!
     deleteOnePublicacion(id:ID!):String!
+    login(email:EmailAddress!,password:String):Auth!
 }
 
+type Auth{
+    token:String!
+    message:String!
+}
 
 type Publicacion {
   _id: ID!
@@ -56,6 +61,7 @@ type Autor{
     imagen_perfil:URL!
     biografia:String
     website:String
+    publicaciones:[Publicacion]!
 }
 
 input AutorInput {
@@ -64,7 +70,7 @@ input AutorInput {
     nombreUsuario:String!
     email:EmailAddress!
     numTelefono:String
-    password:String
+    password:String!
     sexo:GENEROS
     imagen_perfil:URL
     biografia:String
