@@ -7,7 +7,10 @@ const getAllAutores = () => Autores.find({activo:true}).populate({
     model:'publicaciones'
 });
 
-const getOneAutor = (id) => Autores.findOne({_id:id,activo:true}).populate('publicaciones');
+const getOneAutor = (id) => Autores.findOne({_id:id,activo:true}).populate({
+    path:'publicaciones',
+    model:'publicaciones' 
+});
 
 const getOneAutorByEmail = (email) => Autores.findOne({email,activo:true});
 

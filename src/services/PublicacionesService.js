@@ -12,9 +12,9 @@ const getSinglePublicacion = (id) => Publicaciones.findOne({_id:id,activo:true})
  };
 
 
-const updatePublicacion = (id,data) => Publicaciones.findOneAndUpdate({_id:id},{...data},{new:true}).populate('autor');
+const updatePublicacion = (id,data,autor) => Publicaciones.findOneAndUpdate({_id:id},{...data},{new:true}).populate('autor');
 
-const deletePublicacion = (id) => Publicaciones.findOneAndUpdate({_id:id, activo:true},{activo:false});
+const deletePublicacion = (id,autor) => Publicaciones.findOneAndUpdate({_id:id, activo:true},{activo:false});
 
 module.exports = {
   getAllPublicaciones,

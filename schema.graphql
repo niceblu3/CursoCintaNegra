@@ -1,21 +1,22 @@
 scalar EmailAddress
 scalar URL
-
+directive @auth on FIELD_DEFINITION | FIELD
 
 type Query {
     getAutores:[Autor]!
     getSingleAutor(id:ID!):Autor!
     getPublicaciones:[Publicacion]!
     getOnePublicacion(id:ID!):Publicacion!
+    me: Autor!@auth
 }
 
 type Mutation{
     createNewAutor(data:AutorInput!):Autor!
-    updateOneAutor(id:ID!,data:AutorUpdateInput!):Autor!
-    deleteOneAutor(id:ID!):String!
-    createNewPublicacion(data:PublicacionInput!):Publicacion
-    updateOnePublicacion(id:ID!,data:PublicacionUpdateInput):Publicacion!
-    deleteOnePublicacion(id:ID!):String!
+    updateOneAutor(id:ID!,data:AutorUpdateInput!):Autor!@auth
+    deleteOneAutor(id:ID!):String!@auth
+    createNewPublicacion(data:PublicacionInput!):Publicacion!@auth
+    updateOnePublicacion(id:ID!,data:PublicacionUpdateInput):Publicacion!@auth
+    deleteOnePublicacion(id:ID!):String!@auth
     login(email:EmailAddress!,password:String):Auth!
 }
 
@@ -37,7 +38,7 @@ type Publicacion {
 input PublicacionInput {
   titulo: String!
   contenido:String!
-  autor: String! #va el id
+  #autor: String! #va el id
   imagen: URL #debe ir obligatorio
 }
 
