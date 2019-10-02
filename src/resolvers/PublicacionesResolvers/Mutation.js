@@ -1,8 +1,17 @@
 const {createPublicacion, updatePublicacion, deletePublicacion} = require('../../services/PublicacionesService');
 //const {getOneAutor} = require('../../services/AutoresService');
+const storage = require('../../utils/storage');
 
 const createNewPublicacion = async(_,{data},{user}) => {
   data.autor = user._id;
+
+  if(data.imagen){
+    const {createReadStream} = await data.imagen;
+    const stream = createReadStream();
+    const image = await storage({stream});
+    data = {...data,imagen:image.url};
+  }
+
   const publicacion = await createPublicacion(data);
   user.publicaciones.push(publicacion._id);
   user.save();
@@ -10,6 +19,13 @@ const createNewPublicacion = async(_,{data},{user}) => {
 };
 
 const updateOnePublicacion = async(_,{id,data},{user}) => {
+  if(data.imagen){
+    const {createReadStream} = await data.imagen;
+    const stream = createReadStream();
+    const image = await storage({stream});
+    data = {...data,imagen:image.url};
+  }
+
   const publicacion = await updatePublicacion(id,data,user);
   if(!publicacion) throw new Error ('La publicación no existe');
   return publicacion;

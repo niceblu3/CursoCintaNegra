@@ -1,5 +1,6 @@
 scalar EmailAddress
 scalar URL
+scalar Upload
 directive @auth on FIELD_DEFINITION | FIELD
 
 type Query {
@@ -39,13 +40,13 @@ input PublicacionInput {
   titulo: String!
   contenido:String!
   #autor: String! #va el id
-  imagen: URL #debe ir obligatorio
+  imagen: Upload #debe ir obligatorio
 }
 
 input PublicacionUpdateInput{
   titulo: String
   contenido: String
-  imagen:URL
+  imagen:Upload
   liked_by: String
   activo: Boolean
 }
