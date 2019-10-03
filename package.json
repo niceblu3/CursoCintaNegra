@@ -4,7 +4,7 @@
   "description": "copia instagram b",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "set NODE_ENV=test && jest --forceExit",
     "dev": "nodemon index.js"
   },
   "author": "Berenice Ramirez",
@@ -16,6 +16,7 @@
     "graphql-scalar": "0.0.9",
     "graphql-scalars": "^1.0.1",
     "graphql-yoga": "^1.18.3",
+    "jest": "^24.9.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.1"
   },
