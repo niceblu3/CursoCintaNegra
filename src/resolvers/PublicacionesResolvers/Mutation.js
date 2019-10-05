@@ -2,7 +2,7 @@ const {createPublicacion, updatePublicacion, deletePublicacion} = require('../..
 //const {getOneAutor} = require('../../services/AutoresService');
 const storage = require('../../utils/storage');
 
-const createNewPublicacion = async(_,{data},{user}) => {
+const createNewPublicacion = async(_,{data},{user,pubsub}) => {
   data.autor = user._id;
 
   if(data.imagen){
@@ -15,6 +15,14 @@ const createNewPublicacion = async(_,{data},{user}) => {
   const publicacion = await createPublicacion(data);
   user.publicaciones.push(publicacion._id);
   user.save();
+
+  pubsub.publish('post',{
+    post:{
+      mutation: 'CREATED',
+      data: publicacion
+    }
+  });
+
   return publicacion;
 };
 

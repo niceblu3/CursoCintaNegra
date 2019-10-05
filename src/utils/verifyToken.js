@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { getOneAutorByEmail } = require('../services/AutoresService');
 
-const verifyToken = async req => {
+const verifyToken = async (req) => {
   try{
     const Authorization = req.get('Authorization');
     if(Authorization){
@@ -10,9 +10,12 @@ const verifyToken = async req => {
       if(!payload) return req;
       const user = await getOneAutorByEmail(payload.email);
       if(!user) return req;
-      req = {...req,user };
+      //req = {...req,user };
+      return user;
+    }else{
+      return {};
     }
-    return req;
+
   }catch(e){
     throw new Error(e.message);
   }

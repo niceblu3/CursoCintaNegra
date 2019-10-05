@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { GraphQLServer } = require('graphql-yoga');
+const { GraphQLServer, PubSub } = require('graphql-yoga');
 const { importSchema } = require('graphql-import');
 const { makeExecutableSchema } = require('graphql-tools');
 const mongoose = require('mongoose');
@@ -16,6 +16,8 @@ mongo.on('error', (error) => console.log(error))
     .once('open',() => console.log('Connected to database'));
 
 const typeDefs = importSchema(__dirname + '/schema.graphql');
+
+const pubsub = new PubSub();
 
 // const typeDefs = `
 
@@ -68,7 +70,11 @@ const schema = makeExecutableSchema({
 
 const server = new GraphQLServer({
   schema,
-  context: async({request}) => verifyToken(request)
+  context: async(req) => ({
+      ...req,
+      pubsub,
+      user: req.request ? await verifyToken(req.request): {}
+  })
 });//schema de graphql
 
 server.start(() => console.log('Works in port 4000 :)'));
