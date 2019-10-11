@@ -34,7 +34,7 @@ const pubsub = new PubSub();
 
 const server = new GraphQLServer({
   schema,
-  context: async({request}) => ({
+  context: async(req) => ({
 		...req,
 		pubsub,
 		user: req.request ? await verifyToken(req.request) : {}
