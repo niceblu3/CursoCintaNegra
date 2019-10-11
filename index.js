@@ -70,11 +70,17 @@ const schema = makeExecutableSchema({
 
 const port = process.env.PORT || 4000;
 
+const pubsub = new PubSub();
+
 const server = new GraphQLServer({
   schema,
-  context: async({request}) => verifyToken(request)
+  context: async({request}) => ({
+		...req,
+		pubsub,
+		user: req.request ? await verifyToken(req.request) : {}
+	})
 });//schema de graphql
 
-server.start({port},() => console.log('Works in port 4000 :)'));
+server.start({port, cors:{origin:"*"} },() => console.log('Works in port 4000 :)'));
 
 module.exports = { schema };
