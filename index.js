@@ -17,7 +17,7 @@ mongo.on('error', (error) => console.log(error))
 
 const typeDefs = importSchema(__dirname + '/schema.graphql');
 
-const pubsub = new PubSub();
+
 
 // const typeDefs = `
 
@@ -60,6 +60,8 @@ const pubsub = new PubSub();
 //context -> objeto por el cual se comunican todos los resolvers(Auth)
 //info -> El query que se ejecuto en el cliente
 
+
+
 const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
@@ -67,6 +69,10 @@ const schema = makeExecutableSchema({
       auth: authDirective
     }
 });
+
+const port = process.env.PORT || 4000;
+
+const pubsub = new PubSub();
 
 const server = new GraphQLServer({
   schema,
@@ -77,6 +83,6 @@ const server = new GraphQLServer({
   })
 });//schema de graphql
 
-server.start(() => console.log('Works in port 4000 :)'));
+server.start({port, cors:{origin:"*"} },() => console.log('Works in port 4000 :)'));
 
 module.exports = { schema };
