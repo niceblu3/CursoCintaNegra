@@ -56,7 +56,7 @@ type Autor{
     _id:ID!
     nombre:String!
     apellido:String!
-    nombreUsuario:String!
+    nombreUsuario:String
     email:EmailAddress!
     numTelefono:String
     sexo:GENEROS
@@ -69,7 +69,7 @@ type Autor{
 input AutorInput {
     nombre:String!
     apellido:String!
-    nombreUsuario:String!
+    nombreUsuario:String
     email:EmailAddress!
     numTelefono:String
     password:String!

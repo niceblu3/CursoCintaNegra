@@ -13,7 +13,7 @@ const AutorSchema = new Schema({
     },
     nombreUsuario:{
       type:String,
-      required:true
+      required:false
     },
     email:{
       type:String,
